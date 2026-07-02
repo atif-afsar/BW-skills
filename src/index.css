@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #5e0ed7;
+  --color-brand-purple-light: #ede9fe;
+  --color-brand-bg: #f8f8f8;
+  --color-brand-charcoal: #1a1a1a;
+  --color-brand-grey: #6b7280;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-charcoal);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dropdown-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #5e0ed7 #ede9fe;
+  }
+
+  .dropdown-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown-scroll::-webkit-scrollbar-track {
+    background: #ede9fe;
+    border-radius: 999px;
+  }
+
+  .dropdown-scroll::-webkit-scrollbar-thumb {
+    background: #5e0ed7;
+    border-radius: 999px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100% !important;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+  }
+}
