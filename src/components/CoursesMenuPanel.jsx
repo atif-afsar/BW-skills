@@ -11,7 +11,7 @@ export function CoursesMenuList({ onSelect, variant = "dropdown" }) {
         <li key={course.id}>
           <button
             type="button"
-            onClick={onSelect}
+            onClick={() => onSelect(course)}
             className={`group flex w-full items-start gap-3 text-left transition-colors hover:bg-brand-purple-light/50 ${
               isCompact ? "px-3 py-3" : "px-4 py-3"
             }`}
@@ -48,7 +48,7 @@ export function CoursesMenuFooter({ onSelect, compact = false }) {
     <div className={`border-t border-black/5 bg-white ${compact ? "p-2" : "p-2.5"}`}>
       <button
         type="button"
-        onClick={onSelect}
+        onClick={() => onSelect(null)}
         className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-brand-purple px-4 py-2.5 text-xs font-semibold tracking-widest text-white uppercase transition-opacity hover:opacity-90"
       >
         View All Courses

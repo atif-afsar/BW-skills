@@ -1,6 +1,10 @@
-import { Globe, Mail, MapPin, Phone, Share2, MessageSquare } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
+import SocialIcon from "./SocialIcon";
 import { scrollToSection } from "../utils/scroll";
+import { contactInfo, socialLinks } from "../data/contact";
 
 const navLinks = [
   { label: "Home", id: "home" },
@@ -10,19 +14,34 @@ const navLinks = [
   { label: "Contact", id: "contact" },
 ];
 
-const socialLinks = [
-  { icon: Share2, label: "Social", href: "#" },
-  { icon: Globe, label: "Website", href: "#" },
-  { icon: MessageSquare, label: "Messages", href: "#" },
-];
+const socialVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 export default function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNav = (id) => {
+    if (location.pathname === "/") {
+      scrollToSection(id);
+      return;
+    }
+
+    navigate(`/#${id}`);
+  };
+
   return (
     <footer id="contact" className="border-t border-black/5 bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Logo />
+            <Logo variant="image" subtitle="Skill Academy" />
             <p className="mt-4 text-sm leading-relaxed text-brand-grey">
               Practical skills training from The BrandsWay — a PR & Marketing agency building
               real brands every day.
@@ -38,7 +57,7 @@ export default function Footer() {
                 <li key={link.id}>
                   <button
                     type="button"
-                    onClick={() => scrollToSection(link.id)}
+                    onClick={() => handleNav(link.id)}
                     className="min-h-[44px] text-sm text-brand-grey transition-colors hover:text-brand-purple"
                   >
                     {link.label}
@@ -55,18 +74,24 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               <li className="flex items-start gap-2 text-sm text-brand-grey">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-purple" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>{contactInfo.location}</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-brand-grey">
                 <Phone className="h-4 w-4 shrink-0 text-brand-purple" />
-                <a href="tel:+919876543210" className="hover:text-brand-purple">
-                  +91 98765 43210
+                <a
+                  href={`tel:${contactInfo.phoneTel}`}
+                  className="transition-colors hover:text-brand-purple"
+                >
+                  {contactInfo.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-brand-grey">
                 <Mail className="h-4 w-4 shrink-0 text-brand-purple" />
-                <a href="mailto:academy@thebrandsway.com" className="hover:text-brand-purple">
-                  academy@thebrandsway.com
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="break-all transition-colors hover:text-brand-purple"
+                >
+                  {contactInfo.email}
                 </a>
               </li>
             </ul>
@@ -77,15 +102,24 @@ export default function Footer() {
               Follow Us
             </h3>
             <div className="mt-4 flex gap-3">
-              {socialLinks.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-brand-purple-light text-brand-purple transition-colors hover:bg-brand-purple hover:text-white"
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.id}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  custom={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={socialVariants}
+                  whileHover={{ y: -4, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-brand-purple-light text-brand-purple shadow-sm transition-colors hover:bg-brand-purple hover:text-white hover:shadow-md hover:shadow-brand-purple/20"
                 >
-                  <Icon className="h-5 w-5" />
-                </a>
+                  <SocialIcon name={link.id} />
+                </motion.a>
               ))}
             </div>
           </div>

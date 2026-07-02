@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { getIcon } from "../utils/icons";
 
 export default function CourseCard({ course, index, variant = "grid" }) {
@@ -22,26 +23,34 @@ export default function CourseCard({ course, index, variant = "grid" }) {
           : "w-full"
       }`}
     >
-      <span
-        className="pointer-events-none absolute right-4 top-3 text-5xl font-extrabold text-brand-grey/10 sm:text-6xl"
-        aria-hidden="true"
-      >
-        {ghostNumber}
-      </span>
+      <Link
+        to={`/courses/${course.slug}`}
+        aria-label={`Open ${course.name} course page`}
+        className="absolute inset-0 z-10 rounded-2xl"
+      />
 
-      <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-purple-light text-brand-purple">
-        {getIcon(course.icon, { className: "h-5 w-5", strokeWidth: 2 })}
+      <div className="relative">
+        <span
+          className="pointer-events-none absolute right-4 top-3 text-5xl font-extrabold text-brand-grey/10 sm:text-6xl"
+          aria-hidden="true"
+        >
+          {ghostNumber}
+        </span>
+
+        <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-purple-light text-brand-purple">
+          {getIcon(course.icon, { className: "h-5 w-5", strokeWidth: 2 })}
+        </div>
+
+        <h3 className="pr-10 text-base font-bold leading-snug text-brand-charcoal sm:text-lg">
+          {course.name}
+        </h3>
+
+        <span className="mt-2 inline-block w-fit rounded-full bg-brand-bg px-3 py-1 text-xs font-medium text-brand-grey">
+          {course.duration}
+        </span>
+
+        <div className="mt-3 h-1 w-8 rounded-full bg-brand-purple" />
       </div>
-
-      <h3 className="pr-10 text-base font-bold leading-snug text-brand-charcoal sm:text-lg">
-        {course.name}
-      </h3>
-
-      <span className="mt-2 inline-block w-fit rounded-full bg-brand-bg px-3 py-1 text-xs font-medium text-brand-grey">
-        {course.duration}
-      </span>
-
-      <div className="mt-3 h-1 w-8 rounded-full bg-brand-purple" />
     </motion.article>
   );
 }

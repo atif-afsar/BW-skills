@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { scrollToSection } from "../utils/scroll";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import Logo from "./Logo";
@@ -70,7 +71,7 @@ function HamburgerButton({ onClick, custom }) {
   );
 }
 
-function CoursesDropdown({ onNavigate, motionProps, customIndex }) {
+function CoursesDropdown({ onNavigate, onNavigateCourse, motionProps, customIndex }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -84,8 +85,12 @@ function CoursesDropdown({ onNavigate, motionProps, customIndex }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleCourseClick = () => {
+  const handleCourseClick = (course) => {
     setOpen(false);
+    if (course) {
+      onNavigateCourse(course);
+      return;
+    }
     onNavigate("courses");
   };
 
@@ -144,13 +149,18 @@ function CoursesDropdown({ onNavigate, motionProps, customIndex }) {
   );
 }
 
-function DesktopNav({ onNavigate, motionProps }) {
+function DesktopNav({ onNavigate, onNavigateCourse, motionProps }) {
   return (
     <nav
       className="hidden items-center justify-center gap-6 lg:gap-10 md:flex"
       aria-label="Main navigation"
     >
-      <CoursesDropdown onNavigate={onNavigate} motionProps={motionProps} customIndex={1} />
+      <CoursesDropdown
+        onNavigate={onNavigate}
+        onNavigateCourse={onNavigateCourse}
+        motionProps={motionProps}
+        customIndex={1}
+      />
 
       {navLinks.map((link, i) => (
         <motion.button
@@ -174,6 +184,7 @@ export default function Hero() {
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const reducedMotion = useReducedMotion();
   const videoRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (menuOpen) {
@@ -209,6 +220,14 @@ export default function Hero() {
     setMenuOpen(false);
     setMobileCoursesOpen(false);
     scrollToSection(id);
+  };
+
+  const handleCourseRoute = (course) => {
+    setMenuOpen(false);
+    setMobileCoursesOpen(false);
+    if (course?.slug) {
+      navigate(`/courses/${course.slug}`);
+    }
   };
 
   const motionProps = reducedMotion
@@ -250,7 +269,11 @@ export default function Hero() {
         </motion.button>
 
         <div className="justify-self-center">
-          <DesktopNav onNavigate={handleNav} motionProps={motionProps} />
+          <DesktopNav
+            onNavigate={handleNav}
+            onNavigateCourse={handleCourseRoute}
+            motionProps={motionProps}
+          />
         </div>
 
         <div className="flex items-center justify-self-end gap-3">
@@ -320,7 +343,7 @@ export default function Hero() {
 
                       <div className="dropdown-scroll max-h-[min(42vh,260px)] overflow-y-auto bg-white">
                         <CoursesMenuList
-                          onSelect={() => handleNav("courses")}
+                          onSelect={handleCourseRoute}
                           variant="mobile"
                         />
                       </div>
@@ -387,7 +410,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex flex-col gap-6 px-5 pb-8 sm:px-8 sm:gap-8 md:gap-12 md:px-12 md:pb-12">
+      <div className="relative z-10 -mt-8 flex flex-col gap-6 px-5 pb-24 sm:mt-0 sm:px-8 sm:gap-8 sm:pb-8 md:gap-12 md:px-12 md:pb-12">
         <div className="flex items-center justify-between gap-4">
           <motion.p
             custom={5}
@@ -415,7 +438,7 @@ export default function Hero() {
           </motion.button>
         </div>
 
-        <div className="flex items-end justify-between gap-3 sm:gap-4">
+        <div className="flex items-start justify-between gap-3 sm:items-end sm:gap-4">
           <motion.div
             custom={7}
             {...motionProps}
@@ -427,7 +450,7 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          <div className="text-right">
+          <div className="text-right pr-2 sm:pr-0">
             {headingWords.map((word, wordIndex) => (
               <div key={word} className="overflow-hidden">
                 <motion.span

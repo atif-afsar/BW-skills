@@ -1,27 +1,12 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import CoursesSection from "./components/CoursesSection";
-import WhyUsSection from "./components/WhyUsSection";
-import PricingSection from "./components/PricingSection";
-import TestimonialStrip from "./components/TestimonialStrip";
-import FinalCTA from "./components/FinalCTA";
-import Footer from "./components/Footer";
-import FloatingActionButton from "./components/FloatingActionButton";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import CourseDetailPage from "./pages/CourseDetailPage";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-brand-bg">
-      <Navbar />
-      <main>
-        <Hero />
-        <CoursesSection />
-        <WhyUsSection />
-        <PricingSection />
-        <TestimonialStrip />
-        <FinalCTA />
-      </main>
-      <Footer />
-      <FloatingActionButton />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/courses/:slug" element={<CourseDetailPage />} />
+    </Routes>
   );
 }
