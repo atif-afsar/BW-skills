@@ -11,7 +11,7 @@ export default function Logo({
       <div className={className}>
         <img
           src={logoSrc}
-          alt="The BrandsWay PR and Marketing"
+          alt="BrandsWay logo"
           className={imageClassName}
           width={112}
           height={112}

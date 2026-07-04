@@ -1,8 +1,8 @@
 export const contactInfo = {
-  phoneDisplay: "+91 73029 88037",
-  phoneTel: "+917302988037",
+  phoneDisplay: "+91 73029 88039",
+  phoneTel: "+917302988039",
   email: "brandswaying@gmail.com",
-  whatsapp: "https://wa.me/917302988037",
+  whatsapp: "https://wa.me/917302988039",
   location: "Aligarh, Uttar Pradesh, India",
   website: "https://www.thebrandsway.com",
 };

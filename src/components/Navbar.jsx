@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import { scrollToSection } from "../utils/scroll";
 
@@ -24,6 +25,8 @@ const linkVariants = {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     let ticking = false;
@@ -55,7 +58,24 @@ export default function Navbar() {
 
   const handleNav = (id) => {
     setMenuOpen(false);
-    scrollToSection(id);
+
+    if (location.pathname === "/") {
+      scrollToSection(id);
+      return;
+    }
+
+    navigate(`/#${id}`);
+  };
+
+  const handleEnroll = () => {
+    setMenuOpen(false);
+
+    if (location.pathname === "/") {
+      scrollToSection("contact");
+      return;
+    }
+
+    navigate("/#contact");
   };
 
   return (
@@ -99,7 +119,7 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <motion.button
                   type="button"
-                  onClick={() => handleNav("pricing")}
+                  onClick={handleEnroll}
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   className="hidden min-h-[44px] items-center gap-2 rounded-full bg-brand-purple px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-purple/25 transition-shadow hover:shadow-lg hover:shadow-brand-purple/30 sm:inline-flex"
@@ -165,7 +185,7 @@ export default function Navbar() {
                 variants={linkVariants}
                 initial="closed"
                 animate="open"
-                onClick={() => handleNav("pricing")}
+                onClick={handleEnroll}
                 className="mt-8 flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-brand-purple px-6 py-4 text-lg font-bold text-white"
               >
                 Enroll Now

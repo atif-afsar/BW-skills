@@ -7,6 +7,7 @@ import WhyUsSection from "../components/WhyUsSection";
 import PricingSection from "../components/PricingSection";
 import TestimonialStrip from "../components/TestimonialStrip";
 import FinalCTA from "../components/FinalCTA";
+import EnrollmentSection from "../components/EnrollmentSection";
 import Footer from "../components/Footer";
 import FloatingActionButton from "../components/FloatingActionButton";
 
@@ -20,8 +21,7 @@ export default function HomePage() {
     const timer = window.setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        const top = element.getBoundingClientRect().top + window.scrollY - 96;
-        window.scrollTo({ top, behavior: "smooth" });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 50);
 
@@ -38,6 +38,7 @@ export default function HomePage() {
         <PricingSection />
         <TestimonialStrip />
         <FinalCTA />
+        <EnrollmentSection />
       </main>
       <Footer />
       <FloatingActionButton />

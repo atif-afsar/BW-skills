@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { scrollToSection } from "../utils/scroll";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import Logo from "./Logo";
@@ -152,7 +152,7 @@ function CoursesDropdown({ onNavigate, onNavigateCourse, motionProps, customInde
 function DesktopNav({ onNavigate, onNavigateCourse, motionProps }) {
   return (
     <nav
-      className="hidden items-center justify-center gap-6 lg:gap-10 md:flex"
+      className="pointer-events-auto hidden items-center justify-center gap-6 md:flex lg:gap-10"
       aria-label="Main navigation"
     >
       <CoursesDropdown
@@ -185,6 +185,7 @@ export default function Hero() {
   const reducedMotion = useReducedMotion();
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (menuOpen) {
@@ -222,6 +223,18 @@ export default function Hero() {
     scrollToSection(id);
   };
 
+  const handleEnroll = () => {
+    setMenuOpen(false);
+    setMobileCoursesOpen(false);
+
+    if (location.pathname === "/") {
+      scrollToSection("contact");
+      return;
+    }
+
+    navigate("/#contact");
+  };
+
   const handleCourseRoute = (course) => {
     setMenuOpen(false);
     setMobileCoursesOpen(false);
@@ -255,20 +268,20 @@ export default function Hero() {
       </div>
 
       {/* Desktop: 3-col grid — logo | centered nav | CTA. Mobile: logo + hamburger */}
-      <header className="relative z-20 grid grid-cols-[1fr_auto_1fr] items-center px-5 pt-5 sm:px-8 md:px-12 md:pt-6">
+      <header className="relative isolate z-20 grid grid-cols-[1fr_auto_1fr] items-center px-5 pt-5 sm:px-8 md:px-12 md:pt-6">
         <motion.button
           type="button"
           custom={0}
           {...motionProps}
           variants={fadeDown}
           onClick={() => handleNav("home")}
-          className="min-h-[44px] justify-self-start"
+          className="relative z-30 min-h-[44px] justify-self-start"
           aria-label="BrandsWay Skill Academy home"
         >
           <HeroLogo />
         </motion.button>
 
-        <div className="justify-self-center">
+        <div className="pointer-events-none relative z-20 justify-self-center">
           <DesktopNav
             onNavigate={handleNav}
             onNavigateCourse={handleCourseRoute}
@@ -276,14 +289,14 @@ export default function Hero() {
           />
         </div>
 
-        <div className="flex items-center justify-self-end gap-3">
+        <div className="relative z-30 flex items-center justify-self-end gap-3">
           <motion.button
             type="button"
             custom={5}
             {...motionProps}
             variants={fadeDown}
-            onClick={() => handleNav("pricing")}
-            className="hidden min-h-[40px] items-center gap-1.5 rounded-full bg-black px-5 py-2 text-xs font-semibold tracking-widest text-white uppercase transition-opacity hover:opacity-80 md:inline-flex"
+            onClick={handleEnroll}
+            className="hidden min-h-[44px] cursor-pointer items-center gap-1.5 rounded-full bg-black px-5 py-2.5 text-xs font-semibold tracking-widest text-white uppercase transition-opacity hover:opacity-80 md:inline-flex"
           >
             Enroll Now
             <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.5} />
@@ -374,7 +387,7 @@ export default function Hero() {
             <div className="shrink-0 border-t border-black/5 px-5 py-5 sm:px-8">
               <button
                 type="button"
-                onClick={() => handleNav("pricing")}
+                onClick={handleEnroll}
                 className="flex w-full items-center justify-center gap-2 text-lg font-semibold tracking-widest text-brand-purple uppercase"
               >
                 Enroll Now
@@ -411,26 +424,13 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 -mt-8 flex flex-col gap-6 px-5 pb-24 sm:mt-0 sm:px-8 sm:gap-8 sm:pb-8 md:gap-12 md:px-12 md:pb-12">
-        <div className="flex items-center justify-between gap-4">
-          <motion.p
-            custom={5}
-            {...motionProps}
-            variants={fadeUp}
-            className="max-w-[130px] text-[10px] leading-relaxed font-semibold tracking-widest text-black uppercase sm:max-w-[160px] sm:text-xs md:max-w-xs md:text-sm"
-          >
-            Building Bold
-            <br />
-            Skills That Power
-            <br />
-            Real Careers
-          </motion.p>
-
+        <div className="flex items-center justify-end gap-4">
           <motion.button
             type="button"
             custom={6}
             {...motionProps}
             variants={fadeUp}
-            onClick={() => handleNav("pricing")}
+            onClick={handleEnroll}
             className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-base font-semibold tracking-widest text-brand-purple uppercase sm:gap-2 sm:text-xl md:text-2xl md:hidden"
           >
             Enroll Now
@@ -438,18 +438,7 @@ export default function Hero() {
           </motion.button>
         </div>
 
-        <div className="flex items-start justify-between gap-3 sm:items-end sm:gap-4">
-          <motion.div
-            custom={7}
-            {...motionProps}
-            variants={fadeUp}
-            className="w-[120px] shrink-0 sm:w-[180px] md:w-[280px]"
-          >
-            <p className="text-left text-[9px] leading-relaxed font-semibold tracking-widest text-black uppercase sm:text-xs md:text-right md:text-sm">
-              Skill Academy Built Around Elevating Your Vision Into Industry-Ready Expertise
-            </p>
-          </motion.div>
-
+        <div className="flex items-start justify-end gap-3 sm:items-end sm:gap-4">
           <div className="text-right pr-2 sm:pr-0">
             {headingWords.map((word, wordIndex) => (
               <div key={word} className="overflow-hidden">

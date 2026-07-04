@@ -50,7 +50,7 @@ export default function FinalCTA() {
         >
           <motion.button
             type="button"
-            onClick={() => scrollToSection("pricing")}
+            onClick={() => scrollToSection("contact")}
             animate={
               reducedMotion
                 ? {}
