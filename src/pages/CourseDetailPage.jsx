@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Clock3, Sparkles, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Briefcase, Clock3, Sparkles, Users } from "lucide-react";
 import Logo from "../components/Logo";
+import SEO from "../components/SEO";
 import Footer from "../components/Footer";
 import FloatingActionButton from "../components/FloatingActionButton";
 import SectionEyebrow from "../components/SectionEyebrow";
@@ -15,8 +15,14 @@ import {
   calculateEarlyBirdPrice,
   getCourseBySlug,
 } from "../data/courses";
+import {
+  getCourseSeo,
+  getCourseSeoTitle,
+  getCourseSeoH1,
+  getCourseSeoDescription,
+} from "../data/courseSeo";
+import { getCourseSchema } from "../data/schema";
 import { getIcon } from "../utils/icons";
-import { contactInfo } from "../data/contact";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -24,31 +30,14 @@ const itemVariants = {
 };
 
 function Meta({ course }) {
-  useEffect(() => {
-    const previousTitle = document.title;
-    const previousDescription = document
-      .querySelector('meta[name="description"]')
-      ?.getAttribute("content");
-
-    document.title = `${course.name} | BrandsWay Skill Academy`;
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", course.seoDescription);
-
-    return () => {
-      document.title = previousTitle;
-      if (previousDescription && meta) {
-        meta.setAttribute("content", previousDescription);
-      }
-    };
-  }, [course]);
-
-  return null;
+  return (
+    <SEO
+      title={getCourseSeoTitle(course)}
+      description={getCourseSeoDescription(course)}
+      path={`/courses/${course.slug}`}
+      jsonLd={getCourseSchema(course)}
+    />
+  );
 }
 
 export default function CourseDetailPage() {
@@ -63,6 +52,8 @@ export default function CourseDetailPage() {
   const offlineEarlyBirdPrice = calculateEarlyBirdPrice(course.offline);
   const onlineEarlyBirdPrice = calculateEarlyBirdPrice(onlinePrice);
   const relatedCourses = courses.filter((item) => item.slug !== course.slug).slice(0, 3);
+  const seo = getCourseSeo(course.slug);
+  const careerOpportunities = seo.careerOpportunities || course.outcomes;
 
   return (
     <div className="min-h-screen bg-brand-bg">
@@ -81,13 +72,13 @@ export default function CourseDetailPage() {
               <ArrowLeft className="h-4 w-4" />
               Back Home
             </Link>
-            <a
-              href="#pricing-card"
+            <Link
+              to={`/apply?course=${course.slug}`}
               className="hidden min-h-[44px] items-center gap-2 rounded-full bg-brand-purple px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-purple/20 sm:inline-flex"
             >
               Enroll Now
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -97,14 +88,11 @@ export default function CourseDetailPage() {
           <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             <motion.div initial="hidden" animate="visible" variants={itemVariants}>
               <SectionEyebrow>{course.duration}</SectionEyebrow>
-              <h1 className="text-balance text-4xl font-extrabold leading-tight text-brand-charcoal sm:text-5xl lg:text-6xl">
-                {course.name.split(" ").slice(0, -1).join(" ")}{" "}
-                <span className="text-brand-purple">
-                  {course.name.split(" ").slice(-1)}
-                </span>
+              <h1 className="text-balance text-3xl font-extrabold leading-tight text-brand-charcoal sm:text-4xl lg:text-5xl">
+                {getCourseSeoH1(course)}
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-brand-grey sm:text-lg">
-                {course.overview}
+                {seo.localIntro || course.overview}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -137,7 +125,7 @@ export default function CourseDetailPage() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-brand-grey">
                   <Users className="h-4 w-4 text-brand-purple" />
-                  Small batch, mentor-led delivery
+                  {seo.courseMode || "Online & Offline"} · Small batches
                 </div>
               </div>
 
@@ -179,12 +167,12 @@ export default function CourseDetailPage() {
               </div>
 
               <div className="mt-5 grid gap-3">
-                <a
-                  href={`mailto:${contactInfo.email}`}
+                <Link
+                  to={`/apply?course=${course.slug}`}
                   className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-brand-purple px-6 py-3 text-sm font-bold text-white shadow-md shadow-brand-purple/20"
                 >
-                  Enquire Now
-                </a>
+                  Enroll Now
+                </Link>
                 <Link
                   to="/#pricing"
                   className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-brand-charcoal/10 bg-white px-6 py-3 text-sm font-bold text-brand-charcoal"
@@ -237,6 +225,32 @@ export default function CourseDetailPage() {
                 <p className="mt-3 text-sm leading-relaxed text-brand-grey">{item.desc}</p>
               </motion.article>
             ))}
+          </div>
+        </section>
+
+        <section className="px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <SectionEyebrow>Careers</SectionEyebrow>
+            <h2 className="text-3xl font-extrabold text-brand-charcoal sm:text-4xl">
+              Career Opportunities After This Course
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-brand-grey sm:text-base">
+              Graduates from Brandsway Skills in Aligarh use this training to start freelancing,
+              internships, and entry-level roles across Uttar Pradesh and remote opportunities.
+            </p>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+              {careerOpportunities.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 rounded-2xl bg-white p-5 shadow-lg shadow-black/5"
+                >
+                  <Briefcase className="mt-0.5 h-5 w-5 shrink-0 text-brand-purple" />
+                  <span className="text-sm leading-relaxed text-brand-grey sm:text-base">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

@@ -4,7 +4,7 @@ export const contactInfo = {
   email: "brandswaying@gmail.com",
   whatsapp: "https://wa.me/917302988039",
   location: "Aligarh, Uttar Pradesh, India",
-  website: "https://www.thebrandsway.com",
+  website: "https://bw-skills.vercel.app",
 };
 
 export const socialLinks = [

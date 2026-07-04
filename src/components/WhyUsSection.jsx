@@ -55,10 +55,13 @@ export default function WhyUsSection() {
         >
           <SectionEyebrow>Why Choose Us</SectionEyebrow>
           <h2 className="text-balance text-3xl font-extrabold text-brand-charcoal sm:text-4xl md:text-5xl">
-            Built On <span className="text-brand-purple">Real Experience</span>
+            Why Choose Us in{" "}
+            <span className="text-brand-purple">Aligarh</span>
           </h2>
           <p className="mt-4 max-w-2xl text-base text-brand-grey sm:text-lg">
-            We don&apos;t just teach theory — we train you the way our agency team works every day.
+            Brandsway Skills is built for Aligarh students who want practical AI, coding, and
+            computer training — not just theory. We train you the way our agency team works every
+            day.
           </p>
         </motion.div>
 

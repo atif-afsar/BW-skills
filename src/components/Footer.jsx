@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import SocialIcon from "./SocialIcon";
 import { scrollToSection } from "../utils/scroll";
@@ -8,10 +8,17 @@ import { contactInfo, socialLinks } from "../data/contact";
 
 const navLinks = [
   { label: "Home", id: "home" },
-  { label: "Courses", id: "courses" },
+  { label: "Courses", href: "/courses" },
   { label: "Pricing", id: "pricing" },
   { label: "Why Us", id: "why-us" },
   { label: "Contact", id: "contact" },
+];
+
+const pageLinks = [
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQs", href: "/faq" },
+  { label: "Enroll", href: "/#contact" },
 ];
 
 const socialVariants = {
@@ -34,6 +41,14 @@ export default function Footer() {
     }
 
     navigate(`/#${id}`);
+  };
+
+  const handleLink = (link) => {
+    if (link.id) {
+      handleNav(link.id);
+      return;
+    }
+    navigate(link.href);
   };
 
   return (
@@ -80,8 +95,8 @@ export default function Footer() {
             <div className="flex flex-col items-center text-center sm:col-span-2 sm:items-start sm:text-left lg:col-span-4">
               <Logo variant="image" subtitle="Skill Academy" />
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-brand-grey">
-                Practical skills training from The BrandsWay — a PR & Marketing agency building
-                real brands every day.
+                Brandsway Skills — Aligarh&apos;s institute for AI, coding, Python, web development
+                &amp; computer courses. Practical training from The BrandsWay agency.
               </p>
             </div>
 
@@ -91,10 +106,10 @@ export default function Footer() {
               </h3>
               <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-1 sm:gap-y-2">
                 {navLinks.map((link) => (
-                  <li key={link.id}>
+                  <li key={link.label}>
                     <button
                       type="button"
-                      onClick={() => handleNav(link.id)}
+                      onClick={() => handleLink(link)}
                       className="flex min-h-[44px] w-full items-center justify-center text-sm text-brand-grey transition-colors hover:text-brand-purple sm:justify-start"
                     >
                       {link.label}
@@ -104,7 +119,25 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="sm:col-span-1 lg:col-span-3">
+            <div className="sm:col-span-1 lg:col-span-2">
+              <h3 className="text-center text-sm font-bold uppercase tracking-wider text-brand-charcoal sm:text-left">
+                Resources
+              </h3>
+              <ul className="mt-4 space-y-1">
+                {pageLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
+                      className="flex min-h-[44px] items-center justify-center text-sm text-brand-grey transition-colors hover:text-brand-purple sm:justify-start"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="sm:col-span-1 lg:col-span-2">
               <h3 className="text-center text-sm font-bold uppercase tracking-wider text-brand-charcoal sm:text-left">
                 Contact
               </h3>
@@ -134,7 +167,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div className="sm:col-span-2 lg:col-span-3">
+            <div className="sm:col-span-2 lg:col-span-2">
               <h3 className="text-center text-sm font-bold uppercase tracking-wider text-brand-charcoal sm:text-left">
                 Follow Us
               </h3>

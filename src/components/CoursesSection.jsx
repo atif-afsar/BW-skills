@@ -22,11 +22,13 @@ export default function CoursesSection() {
         >
           <SectionEyebrow>Our Programs</SectionEyebrow>
           <h2 className="text-balance text-3xl font-extrabold text-brand-charcoal sm:text-4xl md:text-5xl">
-            Skill <span className="text-brand-purple">Courses</span>
+            AI, Coding &amp; Computer Courses in{" "}
+            <span className="text-brand-purple">Aligarh</span>
           </h2>
           <p className="mt-4 max-w-2xl text-base text-brand-grey sm:text-lg">
-            Eight industry-focused programs designed for beginners and career switchers —
-            swipe to explore on mobile.
+            Eight industry-focused programs at Brandsway Skills — from AI training and Python
+            coding to web development and computer courses. Practical projects for beginners and
+            career switchers in Aligarh, Uttar Pradesh.
           </p>
         </motion.div>
 
