@@ -200,6 +200,17 @@ export default function Footer() {
 
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-6 text-center text-xs text-brand-grey sm:flex-row sm:text-left sm:text-sm">
             <p>© {new Date().getFullYear()} The BrandsWay Skill Academy. All rights reserved.</p>
+            <p className="text-brand-grey/80">
+              Website by{" "}
+              <a
+                href="https://portfolio-rgzt.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-brand-charcoal transition-colors hover:text-brand-purple"
+              >
+                Atif Afsar
+              </a>
+            </p>
             <p className="text-brand-grey/80">PR & Marketing · Aligarh, India</p>
           </div>
         </div>
