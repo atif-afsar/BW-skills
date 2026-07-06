@@ -42,7 +42,7 @@ export default function CoursesPage() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {courses.map((course, index) => (
-              <CourseCard key={course.id} course={course} index={index} variant="grid" />
+              <CourseCard key={course.id} course={course} index={index} />
             ))}
           </div>
 

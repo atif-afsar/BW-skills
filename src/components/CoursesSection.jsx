@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionEyebrow from "./SectionEyebrow";
 import CourseCard from "./CourseCard";
@@ -8,7 +8,7 @@ import { courses } from "../data/courses";
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.06 },
   },
 };
 
@@ -44,37 +44,15 @@ export default function CoursesSection() {
           </Link>
         </motion.div>
 
-        <div className="mt-10 md:hidden">
-          <div className="mb-3 flex items-center justify-between px-1">
-            <p className="text-xs font-semibold uppercase tracking-widest text-brand-grey">
-              Swipe to explore
-            </p>
-            <ChevronRight className="h-4 w-4 animate-pulse text-brand-purple" aria-hidden="true" />
-          </div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-6 pt-1 snap-x snap-mandatory scrollbar-hide"
-            data-lenis-prevent
-            style={{ WebkitOverflowScrolling: "touch" }}
-          >
-            {courses.map((course, i) => (
-              <CourseCard key={course.id} course={course} index={i} variant="carousel" />
-            ))}
-          </motion.div>
-        </div>
-
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="mt-10 hidden gap-6 md:grid md:grid-cols-2 xl:grid-cols-3"
+          viewport={{ once: true, margin: "-60px" }}
+          className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 md:gap-6 xl:grid-cols-3"
         >
           {courses.map((course, i) => (
-            <CourseCard key={course.id} course={course} index={i} variant="grid" />
+            <CourseCard key={course.id} course={course} index={i} />
           ))}
         </motion.div>
       </div>
