@@ -43,8 +43,8 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <LocalSeoSection />
         <CoursesSection />
+        <LocalSeoSection />
         <WhyUsSection />
         <PricingSection />
         <TestimonialStrip />

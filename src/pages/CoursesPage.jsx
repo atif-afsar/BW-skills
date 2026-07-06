@@ -22,7 +22,7 @@ export default function CoursesPage() {
       <PageHeader />
 
       <main className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export default function CoursesPage() {
             </p>
           </motion.div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {courses.map((course, index) => (
               <CourseCard key={course.id} course={course} index={index} variant="grid" />
             ))}

@@ -71,6 +71,55 @@ function HamburgerButton({ onClick, custom }) {
   );
 }
 
+const heroBtnBase =
+  "inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full text-xs font-bold uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97] sm:min-h-[52px] sm:text-sm";
+
+const heroCoursesBtn = `${heroBtnBase} border-2 border-white/90 bg-white/95 text-brand-charcoal shadow-[0_8px_28px_rgba(0,0,0,0.14)] backdrop-blur-md hover:border-brand-purple/30 hover:text-brand-purple`;
+
+const heroEnrollBtn = `${heroBtnBase} bg-brand-purple text-white shadow-[0_10px_32px_rgba(94,14,215,0.4)] hover:bg-[#4f0fc4] hover:shadow-[0_12px_36px_rgba(94,14,215,0.48)]`;
+
+function HeroActionButtons({ onCourses, onEnroll, motionProps, variant = "mobile", customStart = 6 }) {
+  if (variant === "menu") {
+    return (
+      <div className="grid grid-cols-2 gap-3">
+        <button type="button" onClick={onCourses} className={`${heroCoursesBtn} w-full px-4`}>
+          Courses
+        </button>
+        <button type="button" onClick={onEnroll} className={`${heroEnrollBtn} w-full px-4`}>
+          Enroll Now
+          <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid w-full grid-cols-2 gap-3 md:hidden">
+      <motion.button
+        type="button"
+        custom={customStart}
+        {...motionProps}
+        variants={fadeUp}
+        onClick={onCourses}
+        className={`${heroCoursesBtn} w-full px-3 sm:px-5`}
+      >
+        Courses
+      </motion.button>
+      <motion.button
+        type="button"
+        custom={customStart + 1}
+        {...motionProps}
+        variants={fadeUp}
+        onClick={onEnroll}
+        className={`${heroEnrollBtn} w-full px-3 sm:px-5`}
+      >
+        Enroll Now
+        <ArrowUpRight className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+      </motion.button>
+    </div>
+  );
+}
+
 function CoursesDropdown({ onNavigate, onNavigateCourse, motionProps, customIndex }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -289,19 +338,7 @@ export default function Hero() {
           />
         </div>
 
-        <div className="relative z-30 flex items-center justify-self-end gap-3">
-          <motion.button
-            type="button"
-            custom={5}
-            {...motionProps}
-            variants={fadeDown}
-            onClick={handleEnroll}
-            className="hidden min-h-[44px] cursor-pointer items-center gap-1.5 rounded-full bg-black px-5 py-2.5 text-xs font-semibold tracking-widest text-white uppercase transition-opacity hover:opacity-80 md:inline-flex"
-          >
-            Enroll Now
-            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.5} />
-          </motion.button>
-
+        <div className="relative z-30 flex items-center justify-self-end">
           <div className="md:hidden">
             <HamburgerButton custom={5} onClick={() => setMenuOpen(true)} />
           </div>
@@ -385,14 +422,11 @@ export default function Hero() {
             </nav>
 
             <div className="shrink-0 border-t border-black/5 px-5 py-5 sm:px-8">
-              <button
-                type="button"
-                onClick={handleEnroll}
-                className="flex w-full items-center justify-center gap-2 text-lg font-semibold tracking-widest text-brand-purple uppercase"
-              >
-                Enroll Now
-                <ArrowUpRight className="h-5 w-5" strokeWidth={2} />
-              </button>
+              <HeroActionButtons
+                variant="menu"
+                onCourses={() => handleNav("courses")}
+                onEnroll={handleEnroll}
+              />
             </div>
           </motion.div>
         )}
@@ -424,19 +458,12 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 -mt-8 flex flex-col gap-6 px-5 pb-24 sm:mt-0 sm:px-8 sm:gap-8 sm:pb-8 md:gap-12 md:px-12 md:pb-12">
-        <div className="flex items-center justify-end gap-4">
-          <motion.button
-            type="button"
-            custom={6}
-            {...motionProps}
-            variants={fadeUp}
-            onClick={handleEnroll}
-            className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-base font-semibold tracking-widest text-brand-purple uppercase sm:gap-2 sm:text-xl md:text-2xl md:hidden"
-          >
-            Enroll Now
-            <ArrowUpRight className="h-[18px] w-[18px] sm:h-[22px] sm:w-[22px]" strokeWidth={2} />
-          </motion.button>
-        </div>
+        <HeroActionButtons
+          motionProps={motionProps}
+          customStart={6}
+          onCourses={() => handleNav("courses")}
+          onEnroll={handleEnroll}
+        />
 
         <div className="flex items-start justify-end gap-3 sm:items-end sm:gap-4">
           <div className="text-right pr-2 sm:pr-0">
