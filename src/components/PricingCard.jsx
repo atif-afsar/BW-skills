@@ -1,5 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import AnimatedPrice from "./AnimatedPrice";
+import BatchTiming from "./BatchTiming";
+import { getCourseEnrollWhatsAppUrl } from "../data/contact";
 import {
   calculateOnlinePrice,
   calculateEarlyBirdPrice,
@@ -70,6 +73,18 @@ export default function PricingCard({ course, mode, earlyBird }) {
           </span>
         )}
       </div>
+
+      <BatchTiming mode={mode} className="mt-4" />
+
+      <a
+        href={getCourseEnrollWhatsAppUrl(course, { mode, price: displayPrice, earlyBird })}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-5 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full border border-brand-purple/20 bg-brand-purple-light px-4 py-2.5 text-sm font-bold text-brand-purple transition-colors hover:border-brand-purple hover:bg-brand-purple hover:text-white"
+      >
+        Enroll Now
+        <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+      </a>
     </motion.article>
   );
 }

@@ -44,9 +44,9 @@ export default function HomePage() {
       <main>
         <Hero />
         <CoursesSection />
-        <LocalSeoSection />
-        <WhyUsSection />
         <PricingSection />
+        <WhyUsSection />
+        <LocalSeoSection />
         <TestimonialStrip />
         <FinalCTA />
         <EnrollmentSection />

@@ -1,6 +1,13 @@
 export const ONLINE_DISCOUNT_PERCENT = 50;
 export const EARLY_BIRD_DISCOUNT_PERCENT = 25;
 
+export const BATCH_SCHEDULE = {
+  slots: ["11:00 AM", "4:00 PM"],
+  summary: "2 batches daily — 11:00 AM & 4:00 PM",
+  offline: "Offline batches: 11:00 AM & 4:00 PM (2 classroom batches daily)",
+  online: "Online batches: 11:00 AM & 4:00 PM (2 live batches daily)",
+};
+
 export const courses = [
   {
     id: 1,

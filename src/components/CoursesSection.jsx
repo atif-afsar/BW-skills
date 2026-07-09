@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SectionEyebrow from "./SectionEyebrow";
 import CourseCard from "./CourseCard";
 import { courses } from "../data/courses";
+import { scrollToSection } from "../utils/scroll";
 
 const containerVariants = {
   hidden: {},
@@ -13,6 +14,17 @@ const containerVariants = {
 };
 
 export default function CoursesSection() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const goToPricing = () => {
+    if (location.pathname === "/") {
+      scrollToSection("pricing");
+      return;
+    }
+    navigate("/#pricing");
+  };
+
   return (
     <section id="courses" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-7xl">
@@ -31,17 +43,28 @@ export default function CoursesSection() {
             </h2>
             <p className="mt-4 text-base text-brand-grey sm:text-lg">
               Tap any course to see the full syllabus, fees, and career outcomes. Eight practical
-              programs for beginners and career switchers.
+              programs for beginners and career switchers — fees and bundle packages are listed
+              right below.
             </p>
           </div>
 
-          <Link
-            to="/courses"
-            className="inline-flex min-h-[48px] shrink-0 items-center gap-2 self-start rounded-full border border-black/10 bg-brand-bg px-5 py-3 text-sm font-bold text-brand-charcoal transition-colors hover:border-brand-purple hover:text-brand-purple sm:self-auto"
-          >
-            Browse all
-            <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
-          </Link>
+          <div className="flex shrink-0 flex-col gap-3 self-start sm:self-auto">
+            <Link
+              to="/courses"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-black/10 bg-brand-bg px-5 py-3 text-sm font-bold text-brand-charcoal transition-colors hover:border-brand-purple hover:text-brand-purple"
+            >
+              Browse all
+              <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+            </Link>
+            <button
+              type="button"
+              onClick={goToPricing}
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-purple px-5 py-3 text-sm font-bold text-white shadow-md shadow-brand-purple/20 transition-colors hover:bg-[#4f0fc4]"
+            >
+              Fees &amp; bundles
+              <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+            </button>
+          </div>
         </motion.div>
 
         <motion.div

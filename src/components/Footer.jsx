@@ -8,13 +8,15 @@ import { contactInfo, socialLinks } from "../data/contact";
 
 const navLinks = [
   { label: "Home", id: "home" },
-  { label: "Courses", href: "/courses" },
+  { label: "Courses", id: "courses" },
+  { label: "Bundles", id: "bundles" },
   { label: "Pricing", id: "pricing" },
   { label: "Why Us", id: "why-us" },
   { label: "Contact", id: "contact" },
 ];
 
 const pageLinks = [
+  { label: "All Courses", href: "/courses" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "FAQs", href: "/faq" },

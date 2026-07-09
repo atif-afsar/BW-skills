@@ -15,9 +15,16 @@ function resolveDefaultProgram(searchParams) {
   return "";
 }
 
+function resolveDefaultMode(searchParams) {
+  const mode = searchParams.get("mode");
+  if (mode === "online" || mode === "offline") return mode;
+  return "";
+}
+
 export default function ApplyPage() {
   const [searchParams] = useSearchParams();
   const defaultProgram = resolveDefaultProgram(searchParams);
+  const defaultMode = resolveDefaultMode(searchParams);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,7 +40,7 @@ export default function ApplyPage() {
       <PageHeader backLabel="Back Home" action={null} />
 
       <main>
-        <EnrollmentSection defaultProgram={defaultProgram} />
+        <EnrollmentSection defaultProgram={defaultProgram} defaultMode={defaultMode} />
       </main>
 
       <Footer />

@@ -9,6 +9,7 @@ import SectionEyebrow from "../components/SectionEyebrow";
 import AnimatedPrice from "../components/AnimatedPrice";
 import {
   courses,
+  BATCH_SCHEDULE,
   EARLY_BIRD_DISCOUNT_PERCENT,
   ONLINE_DISCOUNT_PERCENT,
   calculateOnlinePrice,
@@ -144,6 +145,9 @@ export default function CourseDetailPage() {
                   <p className="mt-1 text-xs font-medium text-brand-purple">
                     Early-bird offline · {EARLY_BIRD_DISCOUNT_PERCENT}% OFF
                   </p>
+                  <p className="mt-2 text-[11px] leading-relaxed text-brand-grey">
+                    {BATCH_SCHEDULE.offline}
+                  </p>
                 </div>
 
                 <div className="rounded-2xl bg-brand-bg p-4">
@@ -159,6 +163,9 @@ export default function CourseDetailPage() {
                   />
                   <p className="mt-1 text-xs font-medium text-brand-purple">
                     Early-bird online · {EARLY_BIRD_DISCOUNT_PERCENT}% OFF
+                  </p>
+                  <p className="mt-2 text-[11px] leading-relaxed text-brand-grey">
+                    {BATCH_SCHEDULE.online}
                   </p>
                   <p className="mt-1 text-[11px] text-brand-grey">
                     Online base is {ONLINE_DISCOUNT_PERCENT}% lower than offline classroom fee.

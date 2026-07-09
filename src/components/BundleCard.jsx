@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import AnimatedPrice from "./AnimatedPrice";
+import BatchTiming from "./BatchTiming";
+import { getBundleEnrollWhatsAppUrl } from "../data/contact";
 import {
   getBundleOfflinePrice,
   calculateOnlinePrice,
@@ -81,14 +83,19 @@ export default function BundleCard({ bundle, mode, earlyBird }) {
         )}
       </div>
 
-      <motion.button
-        type="button"
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        className="mt-5 min-h-[44px] rounded-full bg-brand-purple px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-purple/20"
-      >
-        Enroll in Bundle
-      </motion.button>
+      <BatchTiming mode={mode} className="mt-4" />
+
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-5">
+        <a
+          href={getBundleEnrollWhatsAppUrl(bundle, { mode, price: displayPrice })}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-brand-purple px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-purple/20 transition-colors hover:bg-[#4f0fc4]"
+        >
+          Enroll in Bundle
+          <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+        </a>
+      </motion.div>
     </motion.article>
   );
 }

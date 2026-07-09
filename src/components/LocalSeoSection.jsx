@@ -28,7 +28,7 @@ export default function LocalSeoSection() {
   return (
     <section
       id="about-aligarh"
-      className="border-y border-black/5 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="scroll-mt-24 border-y border-black/5 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
       aria-labelledby="local-seo-heading"
     >
       <div className="mx-auto max-w-6xl">

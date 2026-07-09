@@ -45,7 +45,7 @@ const cardVariants = {
 
 export default function WhyUsSection() {
   return (
-    <section id="why-us" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <section id="why-us" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

@@ -5,7 +5,7 @@ import EnrollmentForm from "./EnrollmentForm";
 import { EARLY_BIRD_DISCOUNT_PERCENT } from "../data/courses";
 import { contactInfo } from "../data/contact";
 
-export default function EnrollmentSection({ defaultProgram = "" }) {
+export default function EnrollmentSection({ defaultProgram = "", defaultMode = "" }) {
   return (
     <section id="contact" className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
@@ -63,7 +63,7 @@ export default function EnrollmentSection({ defaultProgram = "" }) {
             </a>
           </motion.div>
 
-          <EnrollmentForm defaultProgram={defaultProgram} />
+          <EnrollmentForm defaultProgram={defaultProgram} defaultMode={defaultMode} />
         </div>
       </div>
     </section>

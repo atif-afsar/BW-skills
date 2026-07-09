@@ -21,8 +21,12 @@ const inputClassName =
 const labelClassName =
   "mb-2 block text-xs font-bold uppercase tracking-widest text-brand-charcoal";
 
-export default function EnrollmentForm({ defaultProgram = "" }) {
-  const [form, setForm] = useState({ ...initialForm, program: defaultProgram });
+export default function EnrollmentForm({ defaultProgram = "", defaultMode = "" }) {
+  const [form, setForm] = useState({
+    ...initialForm,
+    program: defaultProgram,
+    mode: defaultMode === "online" || defaultMode === "offline" ? defaultMode : initialForm.mode,
+  });
   const [submitted, setSubmitted] = useState(false);
   const [programError, setProgramError] = useState("");
   const [submitError, setSubmitError] = useState("");
@@ -135,7 +139,14 @@ export default function EnrollmentForm({ defaultProgram = "" }) {
               setSubmitted(false);
               setProgramError("");
               setSubmitError("");
-              setForm({ ...initialForm, program: defaultProgram });
+              setForm({
+                ...initialForm,
+                program: defaultProgram,
+                mode:
+                  defaultMode === "online" || defaultMode === "offline"
+                    ? defaultMode
+                    : initialForm.mode,
+              });
             }}
             className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-brand-purple px-8 py-3 text-sm font-bold text-white shadow-md shadow-brand-purple/25 transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
