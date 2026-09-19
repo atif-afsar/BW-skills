@@ -14,8 +14,8 @@ export default function CoursesPage() {
   return (
     <PageShell>
       <SEO
-        title="AI, Coding & Computer Courses in Aligarh | Brandsway Skills"
-        description="Browse all AI, Python, web development, full stack & computer courses at Brandsway Skills in Aligarh. Online & offline batches with practical projects."
+        title="AI, Coding & Data Analytics Courses in Aligarh | Brandsway Skills"
+        description="Browse flagship programs in AI Skills, Coding + AI Automation, and Data Analytics at BrandsWay Skill Academy in Aligarh. Online & offline batches with practical projects."
         path="/courses"
         jsonLd={getOrganizationSchema()}
       />
@@ -30,13 +30,13 @@ export default function CoursesPage() {
           >
             <SectionEyebrow>All Programs</SectionEyebrow>
             <h1 className="text-balance text-3xl font-extrabold text-brand-charcoal sm:text-4xl lg:text-5xl">
-              AI, Coding &amp; Computer Courses in{" "}
+              Flagship Career Programs in{" "}
               <span className="text-brand-purple">Aligarh</span>
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-brand-grey sm:text-lg">
-              Choose from 8 industry-focused programs at Brandsway Skills — Aligarh&apos;s
-              training institute for AI, Python, web development, design, and digital skills.
-              Every course includes hands-on projects and mentor support.
+              Explore 3 comprehensive, career-oriented programs at BrandsWay Skill Academy —
+              practical training in AI Skills, Coding + Automation, and Data Analytics with hands-on
+              projects and agency mentorship.
             </p>
           </motion.div>
 

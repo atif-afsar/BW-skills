@@ -12,6 +12,7 @@ import {
   Users,
   Award,
   CreditCard,
+  BarChart3,
 } from "lucide-react";
 
 const iconMap = {
@@ -27,6 +28,7 @@ const iconMap = {
   Users,
   Award,
   CreditCard,
+  BarChart3,
 };
 
 export function getIcon(name, props = {}) {

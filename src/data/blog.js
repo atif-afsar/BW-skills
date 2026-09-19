@@ -31,7 +31,7 @@ export const blogPosts = [
           "Small batch sizes with mentor feedback",
           "Portfolio-ready assignments you can show clients or employers",
           "Online and offline options if you commute from Civil Lines or Ramghat Road",
-          "Transparent fees with early-bird or EMI options",
+          "Transparent fees with special launch offers and bundle savings",
         ],
       },
       {
@@ -40,7 +40,7 @@ export const blogPosts = [
       },
       {
         type: "p",
-        text: "At Brandsway Skills in Aligarh, our AI Tools & Automation program covers prompt workflows, no-code automation, content systems, and productivity stacks used by agencies and modern teams. The 6-week course is designed for beginners and includes mini-projects you can add to your portfolio.",
+        text: "At Brandsway Skills in Aligarh, our AI Skills for Real Opportunities program covers prompt workflows, creative AI design, video editing, digital marketing, landing page creation, and freelancing. The 6-week program is designed for beginners and includes 7 practical projects you can add to your portfolio.",
       },
       {
         type: "h2",
@@ -121,9 +121,9 @@ export const blogPosts = [
       {
         type: "list",
         items: [
-          "Programming & Coding Fundamentals (Python)",
-          "Web Designing & Development",
-          "Full Stack Web Development",
+          "AI Skills for Real Opportunities",
+          "Coding + AI Automation",
+          "Data Analytics",
         ],
       },
     ],

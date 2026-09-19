@@ -14,7 +14,7 @@ const bundleOptions = bundles.map((bundle) => ({
   description: bundle.description,
 }));
 
-export const programOptions = [...courseOptions, ...bundleOptions];
+const programOptions = [...courseOptions, ...bundleOptions];
 
 export default function ProgramSelect({ value, onChange, error }) {
   const [open, setOpen] = useState(false);

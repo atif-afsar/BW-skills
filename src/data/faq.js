@@ -7,7 +7,7 @@ export const faqItems = [
   {
     question: "Which AI and coding courses do you offer in Aligarh?",
     answer:
-      "We offer AI Tools & Automation, Python programming, web designing & development, full stack web development, graphic design, video editing, performance marketing, and social media management — all with practical, project-based training.",
+      "We offer three flagship career programs: AI Skills for Real Opportunities (6 Weeks), Coding + AI Automation (10 Weeks), and Data Analytics (2.5 Months) — all featuring hands-on project work, portfolio building, and small-batch mentorship.",
   },
   {
     question: "Do I need prior coding experience to join?",
@@ -20,9 +20,9 @@ export const faqItems = [
       "Yes. You can choose online live classes or offline classroom training in Aligarh. Weekend and flexible timing options may be available depending on the batch — contact us for the latest schedule.",
   },
   {
-    question: "What is the course fee and are EMI options available?",
+    question: "What is the fee structure and are discounts available?",
     answer:
-      "Course fees vary by program. We offer early-bird discounts and flexible EMI payment options. Visit our pricing section or contact us on WhatsApp for the latest fee structure and offers.",
+      "Course fees start at special launch rates with up to 50% savings on individual programs and bundle packages. Online batches are also offered at half the offline classroom fee. Visit our pricing section or contact us on WhatsApp for latest fee details.",
   },
   {
     question: "Will I get a certificate after completing the course?",

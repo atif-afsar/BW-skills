@@ -7,7 +7,7 @@ export function CoursesMenuList({ onSelect, variant = "dropdown" }) {
 
   return (
     <ul className={`divide-y divide-black/[0.04] ${isCompact ? "py-1" : "py-1.5"}`}>
-      {courses.map((course, index) => (
+      {courses.map((course) => (
         <li key={course.id}>
           <button
             type="button"
@@ -28,13 +28,18 @@ export function CoursesMenuList({ onSelect, variant = "dropdown" }) {
                 >
                   {course.name}
                 </span>
-                <span className="shrink-0 text-[10px] font-bold tracking-wider text-brand-purple/40">
-                  {String(index + 1).padStart(2, "0")}
+                <span className="shrink-0 text-[10px] font-bold tracking-wider text-brand-purple/50">
+                  {course.pillar}
                 </span>
               </span>
-              <span className="mt-1 inline-flex rounded-full bg-brand-bg px-2 py-0.5 text-[10px] font-semibold tracking-wider text-brand-grey uppercase">
-                {course.duration}
-              </span>
+              <div className="mt-1 flex items-center gap-2">
+                <span className="inline-flex rounded-full bg-brand-bg px-2 py-0.5 text-[10px] font-semibold tracking-wider text-brand-grey uppercase">
+                  {course.duration}
+                </span>
+                <span className="text-[11px] font-bold text-brand-charcoal">
+                  ₹{course.currentPrice.toLocaleString("en-IN")}
+                </span>
+              </div>
             </span>
           </button>
         </li>
@@ -69,7 +74,7 @@ export function CoursesMenuHeader({ compact = false }) {
         Our Programs
       </p>
       <p className="mt-0.5 text-xs font-normal tracking-normal text-brand-grey normal-case">
-        {courses.length} industry-ready skill courses
+        3 flagship career programs
       </p>
     </div>
   );

@@ -10,8 +10,8 @@ export default function AnimatedPrice({ value, className = "" }) {
   useEffect(() => {
     if (reducedMotion) {
       currentRef.current = value;
-      setDisplay(value);
-      return;
+      const raf = requestAnimationFrame(() => setDisplay(value));
+      return () => cancelAnimationFrame(raf);
     }
 
     const controls = animate(currentRef.current, value, {

@@ -88,7 +88,7 @@ export function getCourseSchema(course) {
     },
     offers: {
       "@type": "Offer",
-      price: earlyBirdPrice,
+      price: course.currentPrice || earlyBirdPrice,
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
       url: `${SITE_URL}/apply?course=${course.slug}`,

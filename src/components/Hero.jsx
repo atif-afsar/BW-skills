@@ -21,9 +21,9 @@ const navLinks = [
 ];
 
 const stats = [
-  { value: "8", label: "SKILL\nPROGRAMS", index: 2 },
+  { value: "3", label: "CORE\nPROGRAMS", index: 2 },
   { value: "500", label: "STUDENTS\nTRAINED", index: 3 },
-  { value: "25%", label: "EARLY BIRD\nSAVINGS", index: 4 },
+  { value: "50%", label: "SPECIAL\nSAVINGS", index: 4 },
 ];
 
 const headingWords = ["Learn", "Real", "Skills"];

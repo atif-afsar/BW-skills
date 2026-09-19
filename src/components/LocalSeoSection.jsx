@@ -104,8 +104,8 @@ export default function LocalSeoSection() {
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-purple" />
                 <span>
-                  <strong className="text-brand-charcoal">EMI &amp; early-bird offers</strong> —
-                  quality training without upfront pressure
+                  <strong className="text-brand-charcoal">Special launch offers &amp; discounts</strong> —
+                  transparent, accessible pricing on single courses and bundles
                 </span>
               </li>
             </ul>

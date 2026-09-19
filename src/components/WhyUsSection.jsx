@@ -22,10 +22,10 @@ const features = [
       "Graduate with a portfolio piece and certificate backed by a working PR & marketing agency.",
   },
   {
-    icon: "CreditCard",
-    title: "Flexible EMI Payment",
+    icon: "TrendingUp",
+    title: "Portfolio & Career Support",
     description:
-      "Spread your investment with easy EMI options — quality education without upfront pressure.",
+      "Graduate with deployable projects, live code, and interview-ready case studies to pitch clients and employers.",
   },
 ];
 
