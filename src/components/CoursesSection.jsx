@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionEyebrow from "./SectionEyebrow";
@@ -106,7 +106,15 @@ function CourseCardBody({ course }) {
 }
 
 export default function CoursesSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [filter, setFilter] = useState("ALL");
+
+  const filters = ["ALL", "AI", "DATA", "CODE", "AUTOMATION"];
+
+  const filteredCourses = courses.filter((course) => {
+    if (filter === "ALL") return true;
+    if (filter === "CODE") return course.category.includes("CODING");
+    return course.category.includes(filter);
+  });
 
   return (
     <section
@@ -126,54 +134,49 @@ export default function CoursesSection() {
           className="flex flex-col items-center text-center"
         >
           <SectionEyebrow>Flagship Programs</SectionEyebrow>
-          <h2 className="mt-2 text-balance text-3xl font-extrabold text-brand-charcoal sm:text-4xl md:text-5xl lg:text-6xl">
-            Learn Skills That <span className="text-brand-purple">Create Opportunities.</span>
+          <h2 className="mt-2 text-balance text-3xl font-extrabold text-brand-charcoal sm:text-4xl md:text-5xl lg:text-6xl uppercase">
+            CHOOSE YOUR <span className="text-brand-purple">SKILL PATH</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brand-grey sm:text-lg">
-            <strong>AI. CODE. DATA.</strong> Three focused, project-driven career tracks built to
-            take you from foundational understanding to real-world execution.
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brand-grey sm:text-lg font-medium">
+            One academy. Four paths. Real skills for a changing world.
           </p>
 
-          {/* Interactive Course Switcher Tabs (Desktop & Tablet) */}
           <div className="mt-8 hidden flex-wrap items-center justify-center gap-2 rounded-full border border-black/5 bg-white p-1.5 shadow-md shadow-black/5 sm:flex">
-            {courses.map((c, i) => (
+            {filters.map((f) => (
               <button
-                key={c.id}
+                key={f}
                 type="button"
-                onClick={() => setActiveIndex(i)}
+                onClick={() => setFilter(f)}
                 className={`relative rounded-full px-5 py-2.5 text-xs font-extrabold tracking-wider uppercase transition-all duration-300 ${
-                  activeIndex === i
+                  filter === f
                     ? "bg-brand-purple text-white shadow-md shadow-brand-purple/30"
                     : "text-brand-charcoal/70 hover:text-brand-purple"
                 }`}
               >
-                <span className="mr-1.5 opacity-60">0{i + 1}</span>
-                {c.shortTitle} · <span className="font-medium opacity-80">{c.pillar}</span>
+                {f}
               </button>
             ))}
           </div>
         </motion.div>
 
-        {/* Desktop 3D Spatial Gallery */}
-        <div className="mt-14 hidden lg:block [perspective:1400px]">
-          <div className="grid grid-cols-3 gap-6 items-stretch">
-            {courses.map((course, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.article
-                  key={course.id}
-                  onClick={() => setActiveIndex(index)}
-                  animate={{
-                    scale: isActive ? 1.02 : 0.96,
-                    opacity: isActive ? 1 : 0.78,
-                    y: isActive ? -8 : 6,
-                  }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl border transition-all duration-500 bg-white ${
-                    isActive
-                      ? "border-brand-purple/40 shadow-2xl shadow-brand-purple/15 ring-2 ring-brand-purple/20 z-20"
-                      : "border-black/5 shadow-lg shadow-black/5 hover:border-black/20 hover:opacity-95 z-10"
-                  }`}
+        <div className="mt-14 hidden lg:block [perspective:1400px] min-h-[600px]">
+          <div className="grid grid-cols-2 gap-6 items-stretch">
+            <AnimatePresence mode="popLayout">
+              {filteredCourses.map((course, index) => {
+                const isActive = true; // Always active since it's filtered
+                return (
+                  <motion.article
+                    key={course.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{
+                      scale: 1,
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className={`group relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-500 bg-white border-brand-purple/20 shadow-2xl shadow-brand-purple/10 ring-1 ring-brand-purple/10 z-20`}
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   {/* Integrated Studio Header Bar */}
@@ -181,20 +184,14 @@ export default function CoursesSection() {
                     <div className="flex items-center gap-2">
                       <span className="flex h-2 w-2 rounded-full bg-brand-purple shadow-[0_0_8px_#6812EC]" />
                       <span className="font-mono text-[11px] font-bold tracking-wider uppercase text-slate-300">
-                        0{index + 1} · {course.pillar}
+                        {String(courses.indexOf(course) + 1).padStart(2, '0')} · {course.pillar}
                       </span>
                     </div>
 
-                    {isActive ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-brand-purple px-2.5 py-0.5 text-[10px] font-bold text-white shadow-sm shadow-brand-purple/40">
-                        <Sparkles className="h-3 w-3" />
-                        Active View
-                      </span>
-                    ) : (
-                      <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium text-slate-400 group-hover:text-white">
-                        Click to Focus
-                      </span>
-                    )}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-brand-purple px-2.5 py-0.5 text-[10px] font-bold text-white shadow-sm shadow-brand-purple/40">
+                      <Sparkles className="h-3 w-3" />
+                      Active View
+                    </span>
                   </div>
 
                   {/* Top 3D Visual Stage */}
@@ -211,14 +208,20 @@ export default function CoursesSection() {
                 </motion.article>
               );
             })}
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Mobile & Tablet Immersive Vertical Flow */}
         <div className="mt-10 flex flex-col gap-8 lg:hidden">
-          {courses.map((course, index) => (
-            <article
+          <AnimatePresence mode="popLayout">
+          {filteredCourses.map((course, index) => (
+            <motion.article
               key={course.id}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-black/5 bg-white shadow-xl shadow-black/5 transition-all"
             >
               {/* Integrated Studio Header Bar */}
@@ -226,7 +229,7 @@ export default function CoursesSection() {
                 <div className="flex items-center gap-2">
                   <span className="flex h-2 w-2 rounded-full bg-brand-purple shadow-[0_0_8px_#6812EC]" />
                   <span className="font-mono text-[11px] font-bold tracking-wider uppercase text-slate-300">
-                    0{index + 1} · {course.pillar}
+                    {String(courses.indexOf(course) + 1).padStart(2, '0')} · {course.pillar}
                   </span>
                 </div>
                 <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-semibold text-slate-300 uppercase">
@@ -241,8 +244,9 @@ export default function CoursesSection() {
 
               {/* Card Content */}
               <CourseCardBody course={course} />
-            </article>
+            </motion.article>
           ))}
+          </AnimatePresence>
         </div>
 
         {/* Bottom Section Controls & Pricing Link */}
@@ -262,7 +266,7 @@ export default function CoursesSection() {
               to="/courses"
               className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-black/10 bg-brand-bg px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-charcoal transition-colors hover:border-brand-purple hover:text-brand-purple"
             >
-              All 3 Courses
+              All Programs
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a

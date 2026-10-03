@@ -34,7 +34,10 @@ function buildPayload(data, programLabel) {
     Program: programLabel,
     Mode: data.mode === "online" ? "Online" : "Offline",
     City: data.city.trim() || "—",
-    Message: data.message.trim() || "—",
+    Education: data.education?.trim() || "—",
+    Goals: data.goals?.join(", ") || "—",
+    Experience: data.experience || "—",
+    Message: data.message?.trim() || "—",
   };
 }
 

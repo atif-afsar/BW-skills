@@ -285,6 +285,110 @@ function DataAnalyticsVisual() {
 }
 
 /* =========================================================================
+   4. AI ENGINEERING MASTERY — Agent Workflow Visualizer
+   ========================================================================= */
+function AiEngineeringVisual() {
+  return (
+    <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0A051A] via-[#10072B] to-[#0A0516] p-4 text-white select-none">
+      {/* Background ambient lighting */}
+      <div className="pointer-events-none absolute -top-10 left-1/2 h-44 w-72 -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-32 w-32 rounded-full bg-fuchsia-600/20 blur-3xl" />
+
+      {/* Top Header */}
+      <div className="relative z-10 flex items-center justify-between border-b border-white/10 pb-2">
+        <div className="flex items-center gap-2">
+          <span className="flex h-5 w-5 items-center justify-center rounded-md bg-violet-500/20 text-violet-400">
+            <Cpu className="h-3 w-3" />
+          </span>
+          <span className="font-mono text-[10px] font-semibold tracking-wider text-slate-300 uppercase">
+            Agent Workflow
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="rounded-md border border-fuchsia-500/30 bg-fuchsia-500/10 px-2 py-0.5 font-mono text-[9px] font-bold text-fuchsia-300 flex items-center gap-1">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
+            LIVE
+          </span>
+        </div>
+      </div>
+
+      {/* Center 3D Nodes Network */}
+      <div className="relative z-10 my-auto flex h-24 items-center justify-center">
+        {/* Core Node (LLM) */}
+        <motion.div
+          animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 15px rgba(139, 92, 246, 0.4)", "0 0 25px rgba(139, 92, 246, 0.6)", "0 0 15px rgba(139, 92, 246, 0.4)"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-[10%] flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-700 shadow-lg border border-violet-400/50 z-20"
+        >
+          <Wand2 className="h-4 w-4 text-white" />
+        </motion.div>
+
+        {/* API Node */}
+        <motion.div
+          className="absolute left-[35%] flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-600 shadow-lg border border-fuchsia-400/50 z-20"
+        >
+          <Workflow className="h-3.5 w-3.5 text-white" />
+        </motion.div>
+
+        {/* RAG Node */}
+        <motion.div
+          animate={{ y: [-2, 2, -2] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-[60%] flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg border border-indigo-400/50 z-20"
+        >
+          <Database className="h-4 w-4 text-white" />
+        </motion.div>
+
+        {/* Automation Node */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          className="absolute left-[85%] flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 shadow-lg border border-cyan-400/50 z-20"
+        >
+          <Zap className="h-4 w-4 text-white" />
+        </motion.div>
+
+        {/* Connecting Lines */}
+        <svg className="absolute inset-0 h-full w-full pointer-events-none z-10">
+          {/* Path 1: LLM to API */}
+          <path d="M 15% 50% L 35% 50%" stroke="rgba(139, 92, 246, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+          <motion.circle r="1.5" fill="#c084fc" animate={{ cx: ["15%", "35%"], cy: ["50%", "50%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
+          
+          {/* Path 2: API to RAG */}
+          <path d="M 35% 50% L 60% 50%" stroke="rgba(217, 70, 239, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+          <motion.circle r="1.5" fill="#e879f9" animate={{ cx: ["35%", "60%"], cy: ["50%", "50%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }} />
+
+          {/* Path 3: RAG to Auto */}
+          <path d="M 60% 50% L 85% 50%" stroke="rgba(99, 102, 241, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+          <motion.circle r="1.5" fill="#818cf8" animate={{ cx: ["60%", "85%"], cy: ["50%", "50%"] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: 1 }} />
+        </svg>
+
+        {/* Floating Data Embeddings */}
+        <motion.div
+          animate={{ y: [0, -10, 0], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute top-1 left-[50%] h-1.5 w-4 rounded-full bg-indigo-400/60 blur-[1px]"
+        />
+        <motion.div
+          animate={{ y: [0, 8, 0], opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+          className="absolute bottom-2 left-[70%] h-1.5 w-3 rounded-full bg-cyan-400/60 blur-[1px]"
+        />
+      </div>
+
+      {/* Bottom Data Pipeline Strip */}
+      <div className="relative z-10 flex items-center justify-between rounded-lg border border-white/10 bg-black/40 px-2.5 py-1.5 font-mono text-[9px] text-slate-300">
+        <span className="flex items-center gap-1.5 text-violet-300">
+          <Code2 className="h-3 w-3 text-violet-400" />
+          <span>agent.execute(workflow)</span>
+        </span>
+        <span className="text-[9px] font-bold text-fuchsia-400 animate-pulse">DEPLOYED</span>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
    Main Export Component with Smooth Tilt Tracking
    ========================================================================= */
 export default function Course3DVisual({ course, className = "", isInteractive = true }) {
@@ -315,6 +419,9 @@ export default function Course3DVisual({ course, className = "", isInteractive =
     }
     if (course?.id === "coding-ai" || course?.slug?.includes("coding-ai")) {
       return <CodeStudioVisual />;
+    }
+    if (course?.id === "ai-engineering" || course?.slug?.includes("ai-engineering")) {
+      return <AiEngineeringVisual />;
     }
     return <DataAnalyticsVisual />;
   };

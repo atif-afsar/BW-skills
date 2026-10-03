@@ -77,7 +77,7 @@ export default function CourseCard({ course, index }) {
         </div>
 
         {/* Pricing & CTA */}
-        <div className="mt-5 flex items-center justify-between border-t border-black/5 pt-4">
+        <div className="mt-5 flex flex-col gap-3 border-t border-black/5 pt-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <span className="block text-[9px] font-bold uppercase tracking-wider text-brand-grey">
               Launch Fee
@@ -92,14 +92,17 @@ export default function CourseCard({ course, index }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-purple">
-            <span>Explore</span>
-            <span
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-bg text-brand-charcoal transition-all group-hover:bg-brand-purple group-hover:text-white"
-              aria-hidden="true"
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-purple">
+              <span>Explore</span>
+              <ArrowUpRight className="h-3 w-3" strokeWidth={2.5} />
+            </div>
+            <Link
+              to={`/apply?course=${course.slug}`}
+              className="relative z-30 inline-flex min-h-[36px] items-center justify-center rounded-full bg-brand-purple px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-brand-purple/20 transition-all hover:scale-105 hover:bg-[#4f0fc4]"
             >
-              <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
-            </span>
+              Enroll Now
+            </Link>
           </div>
         </div>
       </div>
