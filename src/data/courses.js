@@ -315,7 +315,7 @@ export const courses = [
     tagline: "Turn Data into Decisions. Build a Career in Data Analytics.",
     overview:
       "A practical, job-oriented program focused on learning how to analyze, visualize, and communicate insights from real-world data.",
-    duration: "2.5 Months",
+    duration: "3 Months",
     lectures: 30,
     lectureDuration: "1–1.5 Hours",
     level: "Beginner Friendly",
